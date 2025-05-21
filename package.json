@@ -34,18 +34,24 @@
     "build": "rslib build",
     "check": "biome check --write",
     "dev": "rslib build --watch",
+    "dev:mcp": "npx fastmcp dev src/index.ts",
     "format": "biome format --write",
-    "test": "vitest run"
+    "test": "vitest run",
+    "inspector": "npx fastmcp inspect src/index.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@rslib/core": "^0.8.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.8.1",
     "mcp-client": "^1.12.3",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4"
   },
   "dependencies": {
-    "fastmcp": "^2.0.0"
+    "fastmcp": "^2.0.0",
+    "fs-extra": "^11.3.0",
+    "handlebars": "^4.7.8",
+    "yaml": "^2.8.0"
   }
 }
