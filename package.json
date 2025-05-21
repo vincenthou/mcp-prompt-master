@@ -5,14 +5,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": "./dist/index.cjs",
+  "bin": "./dist/index.js",
   "description": "🔥 Model Context Protocol (MCP) fetch prompts you need",
   "keywords": [
     "mcp",
@@ -33,11 +32,15 @@
   "scripts": {
     "build": "rslib build",
     "check": "biome check --write",
-    "dev": "rslib build --watch",
+    "dev": "NODE_ENV=development rslib build --watch",
     "dev:mcp": "npx fastmcp dev src/index.ts",
     "format": "biome format --write",
     "test": "vitest run",
-    "inspector": "npx fastmcp inspect src/index.ts"
+    "inspector": "npx fastmcp inspect src/index.ts",
+    "version": "changeset version",
+    "postversion": "npm run build",
+    "prerelease": "npm run build",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

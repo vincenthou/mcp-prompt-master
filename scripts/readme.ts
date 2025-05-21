@@ -8,26 +8,30 @@ interface Options {
   readmePath: string;
 }
 
-const getToolsContent = async () => {
+const getPromptsContent = async () => {
 
   const client = new MCPClient({
     name: 'test-client',
     version: '0.0.0',
   });
 
-  await client.connect({
-    type: "stdio",
-    command: "node",
-    args: ['.'],
+  client.on("loggingMessage", (message) => {
+    console.log(message);
   });
 
-  const tools = await client.getAllTools();
+  await client.connect({
+    type: "stdio",
+    command: "npx",
+    args: ['tsx', 'src/index.ts'],
+  });
 
+  const prompts = await client.getAllPrompts();
+  console.log(prompts);
   await client.close();
 
   let result = '| Tool Name | Description |\n| --- | --- |\n';
-  for (const tool of tools) {
-    result += `| ${tool.name} | ${tool.description} |\n`;
+  for (const prompt of prompts) {
+    result += `| ${prompt.name} | ${prompt.description} |\n`;
   }
 
   return result;
@@ -87,7 +91,7 @@ export const readmePlugin = ({ readmePath }: Options): RsbuildPlugin => {
 
           const contentUpdater = createContentUpdater(readmeContent);
 
-          await contentUpdater.update('tools', getToolsContent);
+          await contentUpdater.update('prompts', getPromptsContent);
           await contentUpdater.update('usage-json', getUsageJSONContent);
           await contentUpdater.update('usage-bash', getUsageBashContent);
           await fs.writeFile(readmePath, contentUpdater.getContent());

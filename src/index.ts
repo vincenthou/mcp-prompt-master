@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// 使用动态导入替代静态导入
 import { FastMCP } from "fastmcp"
 import fs from 'fs-extra'
 import path from 'path'
@@ -22,13 +23,13 @@ async function registerPrompts(server: FastMCP) {
       const prompt = file.endsWith(".json") ? JSON.parse(content) : YAML.parse(content)
       if (!prompt.name) {
         console.warn(`Warning: Prompt in ${filePath} is missing a name field. Skipping.`)
-        return null
+        return
       }
 
       // Add prompt to server
       server.addPrompt({
         ...prompt,
-        load: async (args) => {
+        load: async (args: any) => {
           const template = Handlebars.compile(prompt.template)
           return template(args);
         },
