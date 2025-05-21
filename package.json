@@ -1,6 +1,6 @@
 {
-  "name": "rslib-node-dual-ts",
-  "version": "1.0.0",
+  "name": "mcp-prompt-master",
+  "version": "0.0.1",
   "type": "module",
   "exports": {
     ".": {
@@ -10,7 +10,23 @@
     }
   },
   "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": "./dist/index.cjs",
+  "description": "🔥 Model Context Protocol (MCP) fetch prompts you need",
+  "keywords": [
+    "mcp",
+    "prompt"
+  ],
+  "author": "vincenthou",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vincenthou/mcp-prompt-master.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vincenthou/mcp-prompt-master/issues"
+  },
   "files": [
     "dist"
   ],
@@ -25,8 +41,11 @@
     "@biomejs/biome": "^1.9.4",
     "@rslib/core": "^0.8.0",
     "@types/node": "^22.8.1",
+    "mcp-client": "^1.12.3",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4"
   },
-  "private": true
+  "dependencies": {
+    "fastmcp": "^2.0.0"
+  }
 }
