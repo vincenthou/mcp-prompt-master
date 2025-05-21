@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // 使用动态导入替代静态导入
-import { FastMCP } from "fastmcp"
+// import { FastMCP } from "fastmcp"
 import fs from 'fs-extra'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const PROMPTS_DIR = path.join(__dirname, 'prompts')
 
-async function registerPrompts(server: FastMCP) {
+async function registerPrompts(server: any) {
   try {
     await fs.ensureDir(PROMPTS_DIR)
     const files = await fs.readdir(PROMPTS_DIR)
@@ -43,6 +43,7 @@ async function registerPrompts(server: FastMCP) {
 
 (async () => {
   try {
+    const { FastMCP } = await import("fastmcp")
     const server = new FastMCP({ name: "Prompt Master", version: "0.0.1" })
     await registerPrompts(server)
     server.start({ transportType: "stdio" })

@@ -21,8 +21,8 @@ const getPromptsContent = async () => {
 
   await client.connect({
     type: "stdio",
-    command: "npx",
-    args: ['tsx', 'src/index.ts'],
+    command: "node",
+    args: ['.'],
   });
 
   const prompts = await client.getAllPrompts();
